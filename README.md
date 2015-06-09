@@ -1,5 +1,7 @@
 # restful_api
-REST architecture web server  
+REST architecture web server
+
+###HTTP verbs & URLs
 HTTP 200 when GET on /
 
 ##Install
