@@ -2,7 +2,8 @@
 REST architecture web server
 
 ###HTTP verbs & URLs
-HTTP 200 when GET on /
+HTTP 200 when GET on /  
+**More to come, stay tuned**  
 
 ##Install
 
