@@ -7,15 +7,15 @@ HTTP 200 when GET on /
 
 ##Install
 
-### On your machine
+### Locally on your machine
 Go to https://nodejs.org and install Node
 
-###Install Node packages
+###Install Node packages on the server
 npm install -g nodemon  
 npm intall -g flightplan  
 
 ###Download the code
-git clone https://github.com/jbouhier/RESTful_API.git  
+git clone https://github.com/jbouhier/restful_api.git  
 cd restful_api  
 
 ### Devlopement env - Install npm packages
