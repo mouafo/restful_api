@@ -16,7 +16,6 @@
     "stylus": "0.42.3"
   },
   "devDependencies": {
-    "flightplan": "^0.6.3",
-    "fly": "0.0.0"
+    "flightplan": "^0.6.3"
   }
 }
