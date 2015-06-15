@@ -18,12 +18,15 @@ npm intall -g flightplan
 git clone https://github.com/jbouhier/restful_api.git  
 cd restful_api  
 
-### Devlopement env - Install npm packages
-npm install
+### Devlopement env - Install npm packages  
+Will install from packages.json "dependencies" block  
+npm install  
 
 ### Production env - Install npm packages  
 **Beta documentation use at your own risk /!\**  
-npm install production
+Install from packages.json "dependencies" & "devDependencies" blocks  
+npm install production  
+
 
 ###Test locally - Launch Node server
 nodemon  
