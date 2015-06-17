@@ -8,9 +8,9 @@ $app['debug'] = true;
 
 // ... definitions
 
+// Routes
 $app->get('/', function () {
-    $output = 'boop';
-    return $output;
+    return false;
 });
 
 // Start application on the last line
