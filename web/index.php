@@ -1,5 +1,8 @@
 <?php
 
+//use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 // web/index.php
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -9,9 +12,10 @@ $app['debug'] = true;
 // ... definitions
 // MariaDB > user:rest, passwd:happy little api
 
+
 // Routes
 $app->get('/', function () {
-    return false;
+    return new Response(200);
 });
 
 $app->get('/users/{id}', function (Silex\Application $app, $id) {
@@ -21,6 +25,7 @@ $app->get('/users/{id}', function (Silex\Application $app, $id) {
 $app->get('/user/{id}', function (Silex\Application $app, $id) {
     return 'Route: /user/' . [$id];
 });
+
 
 // Start application on the last line
 $app->run();
