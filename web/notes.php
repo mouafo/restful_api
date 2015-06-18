@@ -19,4 +19,17 @@
  *  * $app->delete('/some/route/{id}', function () {
  *      // ....
  * });
+ *
+ *
+ *
+ * POST example
+ *
+ * $app->post('/post/form', function (Request $request) {
+ *     $message = $request->get('message');
+ *     mail('feedback@yoursite.com', '[YourSite] Feedback', $message);
+ *
+ *     return new Response('Thank you for your feedback!', 201);
+ * });
+ *
+ *
  */
