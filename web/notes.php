@@ -1,6 +1,22 @@
 <?php
 
 /*
+ *
+ * === DESIGN ===
+ *
+ * 1- Link controller <-> router
+ *    mkdir controller + code class controller
+ *
+ * 2- ORM <-> controller/service
+ *
+ * 3- Authentication
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * HTTP methods
  *
  * $app->get('/some/route/{id}', function () {
