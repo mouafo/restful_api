@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 $app = new Silex\Application();
 $app['debug'] = true;
 
-// Database
+// Doctrine DBAL
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver'   => 'pdo_mysql',
@@ -15,13 +15,8 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'dbname'   => 'rest',
         'user'     => 'rest',
         'password' => 'happy little api'
-    ),
+    )
 ));
-
-
-
-// ... definitions
-// MariaDB > user:rest, passwd:happy little api
 
 
 // Routes
@@ -30,11 +25,13 @@ $app->get('/', function () {
 });
 
 $app->get('/users/{id}', function ($id) use ($app) {
-    $sql = "SELECT id, from user WHERE id = " . $id;
+    $sql = "SELECT * FROM user WHERE id = ?";
     $user = $app['db']->fetchAssoc($sql, array((int) $id));
 
     return $app->json($user);
+
 })->assert('id', '\d+');
+
 
 $app->get('/user/{id}', function ($id) {
     return 'Route: /user/{id}';
