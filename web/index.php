@@ -1,15 +1,27 @@
 <?php
 
+require_once __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__.'/../vendor/autoload.php';
 $app = new Silex\Application();
 $app['debug'] = true;
 
+// Database
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver'   => 'pdo_mysql',
+        'host'     => 'localhost',
+        'dbname'   => 'rest',
+        'user'     => 'rest',
+        'password' => 'happy little api'
+    ),
+));
+
+
+
 // ... definitions
 // MariaDB > user:rest, passwd:happy little api
-
 
 
 // Routes
@@ -17,12 +29,15 @@ $app->get('/', function () {
     return new Response('', 200);
 });
 
-$app->get('/users/{id}', function ($id) {
-    return 'Route: /users/' . [$id];
-});
+$app->get('/users/{id}', function ($id) use ($app) {
+    $sql = "SELECT id, from user WHERE id = ?";
+    $user = $app['db']->fetchAssoc($sql, array((int) $id));
+
+    return $app->json($user);
+})->assert('id', '\d+');
 
 $app->get('/user/{id}', function ($id) {
-    return 'Route: /user/' . [$id];
+    return 'Route: /user/{id}';
 });
 
 
