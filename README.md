@@ -6,7 +6,11 @@ HTTP 200 when GET on /
 User id infos on http://host/users/{id} and /user/{id}  
 
 ##Install
-composer require silex/silex:~1.3  
+Clone this repository  
+Configure your Web server of choice to point inside /web directory  
+Install composer if you haven't already    
+cd into the project directory  
+composer install  
 
 Team
 ----
