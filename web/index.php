@@ -30,7 +30,7 @@ $app->get('/', function () {
 });
 
 $app->get('/users/{id}', function ($id) use ($app) {
-    $sql = "SELECT id, from user WHERE id = ?";
+    $sql = "SELECT id, from user WHERE id = " . $id;
     $user = $app['db']->fetchAssoc($sql, array((int) $id));
 
     return $app->json($user);
