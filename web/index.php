@@ -19,10 +19,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 ));
 
 
-
 // Routes
 $app->get('/', function () {
-    return new Response($app['db'], 200);
+    $db = $app->json($app['db']);
+    return $db;
 });
 
 $app->get('/users/{id}', function ($id) use ($app) {
