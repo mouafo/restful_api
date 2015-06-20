@@ -26,7 +26,7 @@ $app->get('/', function () {
 
 $app->get('/users/{id}', function ($id) use ($app) {
     $sql = "SELECT * FROM user WHERE id like '" . $id ."'";
-    $user = $app['db']->fetchAssoc($sql, array((int) $id));
+    $user = $app['db']->fetchAssoc($sql, array($id);
 
     return $app->json($user);
 
