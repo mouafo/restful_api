@@ -1,3 +1,3 @@
 #!/bin/bash
 
-chown -R www-data: ../restful_api/*
+chown -R bouhie_j:www-data: ../restful_api/*
