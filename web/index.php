@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,22 +21,23 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 
 // Routes
-$app->get('/', function () {
+$app->get('/', function () use ($app) {
     return new Response('', 200);
 });
 
 $app->get('/users/{id}', function ($id) use ($app) {
-    $sql = "SELECT * FROM user WHERE id like '" . $id ."'";
-    $user = $app['db']->fetchAssoc($sql, array($id);
+    $query = "SELECT * FROM user WHERE id = $id";
+    $user = $app['db']->fetchAssoc($query, array((int) $id));
 
     return $app->json($user);
-
 })->assert('id', '\d+');
 
+$app->get('/user/{id}', function ($id) use ($app) {
+    $query = "SELECT * FROM user WHERE id = $id";
+    $user = $app['db']->fetchAssoc($query, array((int) $id));
 
-$app->get('/user/{id}', function ($id) {
-    return 'Route: /user/{id}';
-});
+    return $app->json($user);
+})->assert('id', '\d+');
 
 
 
