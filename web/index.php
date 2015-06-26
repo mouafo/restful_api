@@ -30,9 +30,10 @@ $app->get('/users/{id}', function ($id) use ($app) {
     $user = $app['db']->fetchAssoc($query, array((int) $id));
 
     if ($user == false)
-        return new Response('', 404);
+        return $app->json(array('status' => 404, 'message' => 'Not Found'));
     if ($user['role'] == 'admin')
-        return new Response('', 401);
+        return $app->json(array('status' => 401, 'message' => 'Unauthorized'));
+
 
     return $app->json($user);
 })->assert('id', '\d+');
@@ -50,10 +51,14 @@ $app->get('/user/{id}', function ($id) use ($app) {
 })->assert('id', '\d+');
 
 
+
+
+
+// Catch non-existing routes
+$app->error(function() use ($app) {
+    return $app->json(array('status' => 500, 'message' => 'Internal Error'));
+});
+
+
 // Start application on the last line
-try {
-    $app->run();
-} catch (Exception $e) {
-    // log or otherwise register the error $e
-    http_response_code(500);
-}
+$app->run();
