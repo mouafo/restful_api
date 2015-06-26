@@ -29,6 +29,11 @@ $app->get('/users/{id}', function ($id) use ($app) {
     $query = "SELECT * FROM user WHERE id = $id";
     $user = $app['db']->fetchAssoc($query, array((int) $id));
 
+    if ($user == false)
+        return new Response('', 404);
+    if ($user['role'] == 'admin')
+        return new Response('', 401);
+
     return $app->json($user);
 })->assert('id', '\d+');
 
@@ -36,10 +41,19 @@ $app->get('/user/{id}', function ($id) use ($app) {
     $query = "SELECT * FROM user WHERE id = $id";
     $user = $app['db']->fetchAssoc($query, array((int) $id));
 
+    if ($user == false)
+        return new Response('', 404);
+    if ($user['role'] == 'admin')
+        return new Response('', 401);
+
     return $app->json($user);
 })->assert('id', '\d+');
 
 
-
 // Start application on the last line
-$app->run();
+try {
+    $app->run();
+} catch (Exception $e) {
+    // log or otherwise register the error $e
+    http_response_code(500);
+}
