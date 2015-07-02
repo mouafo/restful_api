@@ -20,45 +20,75 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     )
 ));
 
-
 // Routes
+
+
+// Etape 1
 $app->get('/', function () use ($app) {
     return new Response('', 200);
 });
 
 
+// Etape 2 + 3
 $app->get('/user/{id}', function ($id) use ($app) {
-    $query = 'SELECT * FROM user WHERE id = :id';
+    $query = 'SELECT id, lastname, firstname, email, role FROM user WHERE id = :id';
     $user = $app['db']->fetchAssoc($query, array('id'=> (int) $id));
 
     if ($user == false)
-        return $app->json(array('status' => 404, 'message' => 'Not Found'));
+        return new Response(
+            json_encode(array('status' => 404, 'message' => 'Not Found')),
+            404,
+            ['Content-type' => 'application/json']
+        );
+
     if ($user['role'] == 'admin')
-        return $app->json(array('status' => 401, 'message' => 'Unauthorized'));
+    {
+        return new Response(
+            json_encode(array('status' => 401, 'message' => 'Unauthorized')),
+            401,
+            ['Content-type' => 'application/json']
+        );
+    }
+    // return $app->json(array('status' => 401, 'message' => 'Unauthorized'));
 
     return $app->json($user);
 })->assert('id', '\d+');
-
 
 $app->get('/users/{id}', function ($id) use ($app) {
     return new RedirectResponse('/user/'.$id);
 })->assert('id', '\d+');
 
+$app->get('/user/', function () use ($app) {
+    return $app->json();
+});
 
-$app->get('/search/users', function (Request $request) use ($app) {
-    $email = $request->get('q');
-//    die($email);
-    $query = "SELECT * FROM user u WHERE u.email = $email";
-    $user = $app['db']->fetchAssoc($query, array($email));
-
-    return array($app->json($user));
+$app->get('/users/', function () use ($app) {
+    return $app->json();
 });
 
 
+// Etape 4
+$app->get('/search/users', function (Request $request) use ($app) {
+    $email = $request->get('q');
 
-// Catch non-existing routes
-$app->error(function() use ($app) {
-    return $app->json(array('status' => 500, 'message' => 'Internal Error'));
+    if (isset($email))
+    {
+        $query = "SELECT * FROM user u WHERE u.email = $email";
+        $user = $app['db']->fetchAssoc($query, array($email));
+    }
+
+    return $app->json($user);
+});
+
+
+// Etape 3 - any error server side
+$app->error(function(\Exception $e) use ($app) {
+    return new Response(
+        json_encode(array('status' => 500, 'message' => 'Internal Server Error')),
+        500,
+        ['Content-type' => 'application/json']
+    );
+
 });
 
 
