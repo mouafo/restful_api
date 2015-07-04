@@ -49,8 +49,6 @@ $app->get('/user/{id}', function ($id) use ($app) {
             ['Content-type' => 'application/json']
         );
     }
-    // return $app->json(array('status' => 401, 'message' => 'Unauthorized'));
-
     return $app->json($user);
 })->assert('id', '\d+');
 
