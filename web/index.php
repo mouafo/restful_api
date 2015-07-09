@@ -66,16 +66,22 @@ $app->get('/users/', function () use ($app) {
 
 
 // Etape 4
-$app->get('/search/users', function (Request $request) use ($app) {
+$app->get('/search/users/', function (Request $request) use ($app) {
     $email = $request->get('q');
 
-    if (isset($email))
-    {
-        $query = "SELECT * FROM user u WHERE u.email = $email";
+    if (isset($email)) {
+        $query = "SELECT lastname, firstname, email, password, role FROM user u WHERE u.email = '$email'";
         $user = $app['db']->fetchAssoc($query, array($email));
     }
 
-    return $app->json($user);
+    if ($user == False)
+        return new Response(
+            json_encode(array('status' => 404, 'message' => 'Not Found')),
+            404,
+            ['Content-type' => 'application/json']
+        );
+
+    return $app->json(array($user));
 });
 
 
