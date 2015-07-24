@@ -1,102 +1,126 @@
+--
+-- Database: `tcm_rest`
+--
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
-        <title>Etna-alternance / OpenId /</title>
-        <link media="all" rel="stylesheet" type="text/css" href="/new_style/all.css" />
-        <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="/public/new_style/ie.css" media="screen"/><![endif]-->
-        <link rel="openid.server" href="https://openid.etna-alternance.net" />
-        <script type='text/javascript' src="/js/cookies.js"></script>
-                        <style type="text/css">
-<!--
-    @import "/js/dojo/dojo-release-1.3.1/dijit/themes/tundra/tundra.css";
--->
-</style>
-<script type="text/javascript">
-//<!--
-    var djConfig = {"usePlainJson":true};
-//-->
-</script>
-<script type="text/javascript" src="/js/dojo/dojo-release-1.3.1/dojo/dojo.js"></script>
+-- --------------------------------------------------------
 
-<script type="text/javascript">
-//<!--
-dojo.require("dojo.data.ItemFileReadStore");
-dojo.addOnLoad(            function (){
-        
-		dojo.connect(dijit.byId('userId'), 'onKeyUp', function change(ev) {
-			if ((ev.keyCode > 65 && ev.keyCode < 90) || ev.keyCode == 109 || ev.keyCode == 224) {
-				dijit.byId('userId').store = new dojo.data.ItemFileReadStore({ url: 'login/userlist/user/' + dojo.byId('role').value + ':' + dojo.byId('userId').value });
-			}
-		});
-		dojo.connect(dijit.byId('userId'), 'onKeyPress', function change(ev) {
-			if (ev.keyCode == 13) {
-				dojo.byId('form_logas').submit();
-			}
-		});
-                }
-        );
-//-->
+--
+-- Table structure for table `user`
+--
 
-</script></head>
-    <body class="login-page">
-        <div id="wrapper">
-            <div class="page">
-                <div class="page-t">
-                    <div class="page-b">
-                        <div id="header">
-                            <strong class="logo"><a href="">Etna la nouvelle alternance en informatique</a></strong>
-                                                    </div>
-                        
-<script language="javascript">
-  window.onload = function () {
-    if (LireCookie('role') !== null) {
-      document.getElementById('role').selectedIndex = LireCookie('role');
-    }
-  }
-</script>
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+    `lastname` varchar(100) NOT NULL,
+      `firstname` varchar(100) NOT NULL,
+        `email` varchar(100) NOT NULL,
+	  `password` varchar(40) NOT NULL,
+	    `role` enum('normal','admin') NOT NULL,
+	      PRIMARY KEY (`id`),
+	        UNIQUE KEY `mail` (`email`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `user`
+--
 
-<div id="main">
-	<div id="login">
-		<h1>OpenID Login : </h1>
-		<div class="section">
-			<form enctype="application/x-www-form-urlencoded" action="/login" method="post" name="login" class="login-form">
-				<input type="hidden" name="openId" value="serveur" id="openId">
-				<div class="row">
-					<label class="float_left" for="role">R&ocirc;le :</label>
-					<select class="float_right" name="role" id="role" onChange="EcrireCookie('role', this.selectedIndex);">
-											            					            	<option value="student" label="Etudiant">Etudiant</option>
-					            					            	<option value="adm" label="Administration">Administration</option>
-					            					            	<option value="prof" label="Prof">Prof</option>
-					            					            	<option value="tutor" label="Tuteur">Tuteur</option>
-					            					            	<option value="istm" label="istm">istm</option>
-					            				        						</select>
-				</div>
-				<div class="row">
-					<label class="float_left" accesskey="L" for="login-text">Login :</label>
-					<input class="float_right" name="login" id="login-text" type="text" class="text" value=""/>
-				</div>
-				<div class="row">
-					<label class="float_left" for="password">Password :</label>
-					<input class="float_right" id="password" name="password" type="password" class="text" />
-				</div>
-				<input class="submit" type="submit" value="Valider" title="Valider" />
-			</form>
-			<strong class="logo2">Open ID</strong>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-			document.login.login.focus();
-	</script>                    </div>
-                </div>
-            </div>
-            <div id="footer">
-                <p>&copy; 2009-2015 ETNA SARL. All rights reserved.</p>
-            </div>
-        </div>
-        <a href="#wrapper" class="skip">Back to top</a>
-    </body>
-</html>
+INSERT INTO `user` (`id`, `lastname`, `firstname`, `email`, `password`, `role`) VALUES
+(1, 'Mckay', 'Darius', 'darius.mckay@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(2, 'Eaton', 'Alfonso', 'alfonso.eaton@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(3, 'Padilla', 'Linda', 'linda.padilla@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(4, 'Lambert', 'Geraldine', 'geraldine.lambert@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(5, 'Crane', 'Benedict', 'benedict.crane@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(6, 'Navarro', 'Larissa', 'larissa.navarro@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(7, 'Daniels', 'Dillon', 'dillon.daniels@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(8, 'Norton', 'Anastasia', 'anastasia.norton@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(9, 'Vega', 'Cally', 'cally.vega@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(10, 'Harvey', 'Jaden', 'jaden.harvey@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(11, 'Moran', 'Charity', 'charity.moran@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(12, 'Nielsen', 'Oren', 'oren.nielsen@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(13, 'Espinoza', 'Guinevere', 'guinevere.espinoza@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(14, 'Merritt', 'Christopher', 'christopher.merritt@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(15, 'Perry', 'Bree', 'bree.perry@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(16, 'Flores', 'Honorato', 'honorato.flores@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(17, 'Marquez', 'Aidan', 'aidan.marquez@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(18, 'Melendez', 'Tallulah', 'tallulah.melendez@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(19, 'Rich', 'Porter', 'porter.rich@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(20, 'Dalton', 'Callie', 'callie.dalton@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(21, 'Hebert', 'Desiree', 'desiree.hebert@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(22, 'Cameron', 'Yasir', 'yasir.cameron@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(23, 'Kirkland', 'Wendy', 'wendy.kirkland@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(24, 'Parks', 'Magee', 'magee.parks@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(25, 'Sawyer', 'Rose', 'rose.sawyer@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(26, 'Dejesus', 'Cole', 'cole.dejesus@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(27, 'Donaldson', 'Donovan', 'donovan.donaldson@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(28, 'Calhoun', 'Kirby', 'kirby.calhoun@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(29, 'Talley', 'Kai', 'kai.talley@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(30, 'Barr', 'Hayden', 'hayden.barr@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(31, 'Foster', 'Mercedes', 'mercedes.foster@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(32, 'Farmer', 'Lee', 'lee.farmer@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(33, 'Dean', 'Cassidy', 'cassidy.dean@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(34, 'Snider', 'Alfreda', 'alfreda.snider@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(35, 'Nixon', 'Kai', 'kai.nixon@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(36, 'Suarez', 'Nina', 'nina.suarez@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(37, 'Cash', 'Ciara', 'ciara.cash@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(38, 'Patrick', 'Delilah', 'delilah.patrick@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(39, 'Curry', 'Ursa', 'ursa.curry@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(40, 'Mclean', 'Grace', 'grace.mclean@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(41, 'Espinoza', 'Adrienne', 'adrienne.espinoza@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(42, 'Snow', 'Aspen', 'aspen.snow@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(43, 'Ayers', 'Dillon', 'dillon.ayers@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(44, 'Beck', 'Xantha', 'xantha.beck@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(45, 'Marshall', 'Hadassah', 'hadassah.marshall@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(46, 'Espinoza', 'Levi', 'levi.espinoza@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(47, 'James', 'Anastasia', 'anastasia.james@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(48, 'Pickett', 'Philip', 'philip.pickett@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(49, 'Moss', 'Len', 'len.moss@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(50, 'Allison', 'Fallon', 'fallon.allison@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(51, 'Avery', 'Autumn', 'autumn.avery@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(52, 'Bray', 'Cally', 'cally.bray@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(53, 'Griffin', 'Joy', 'joy.griffin@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(54, 'Gay', 'Audrey', 'audrey.gay@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(55, 'Parker', 'Kalia', 'kalia.parker@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(56, 'Foley', 'Lyle', 'lyle.foley@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(57, 'Gonzales', 'Linda', 'linda.gonzales@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(58, 'Bright', 'Paul', 'paul.bright@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(59, 'Ortega', 'Liberty', 'liberty.ortega@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(60, 'Adkins', 'Melyssa', 'melyssa.adkins@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(61, 'Booth', 'Gareth', 'gareth.booth@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(62, 'Delgado', 'Eden', 'eden.delgado@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(63, 'Potter', 'Baker', 'baker.potter@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(64, 'Sampson', 'Tyler', 'tyler.sampson@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(65, 'Gaines', 'Rhona', 'rhona.gaines@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(66, 'Wall', 'Deanna', 'deanna.wall@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(67, 'Little', 'Xerxes', 'xerxes.little@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(68, 'Ferrell', 'Carol', 'carol.ferrell@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(69, 'Strickland', 'Avye', 'avye.strickland@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(70, 'Lucas', 'Matthew', 'matthew.lucas@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(71, 'Sutton', 'Damon', 'damon.sutton@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(72, 'Christensen', 'Serena', 'serena.christensen@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(73, 'Dunn', 'Kiara', 'kiara.dunn@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(74, 'Clark', 'Lynn', 'lynn.clark@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(75, 'Williams', 'Aiko', 'aiko.williams@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(76, 'Davis', 'Brenden', 'brenden.davis@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(77, 'Cook', 'Katelyn', 'katelyn.cook@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(78, 'Gregory', 'Dora', 'dora.gregory@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(79, 'House', 'Brielle', 'brielle.house@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(80, 'Brewer', 'Micah', 'micah.brewer@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(81, 'George', 'Constance', 'constance.george@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(82, 'Clay', 'Shellie', 'shellie.clay@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(83, 'Peterson', 'Oleg', 'oleg.peterson@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(84, 'Gilbert', 'Forrest', 'forrest.gilbert@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(85, 'Goodwin', 'Pandora', 'pandora.goodwin@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(86, 'Jefferson', 'Jeremy', 'jeremy.jefferson@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(87, 'Yang', 'Caldwell', 'caldwell.yang@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(88, 'Emerson', 'Giacomo', 'giacomo.emerson@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(89, 'Hart', 'Seth', 'seth.hart@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(90, 'Berg', 'Colin', 'colin.berg@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(91, 'Finch', 'Brooke', 'brooke.finch@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(92, 'Cantrell', 'Victoria', 'victoria.cantrell@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(93, 'Spence', 'Trevor', 'trevor.spence@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(94, 'Combs', 'Callum', 'callum.combs@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(95, 'Walker', 'Kyla', 'kyla.walker@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'admin'),
+(96, 'Henry', 'Walker', 'walker.henry@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(97, 'Madden', 'Kristen', 'kristen.madden@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(98, 'Tucker', 'Guy', 'guy.tucker@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'normal'),
+(99, 'Ratliff', 'Kevin', 'kevin.ratliff@mail.fr', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'admin'),
+(100, 'Le Querec', 'Robin', 'robin.lequerec@etna-alternance.net', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'admin');
