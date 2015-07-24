@@ -14,7 +14,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver'   => 'pdo_mysql',
         'host'     => 'localhost',
-        'dbname'   => 'restful_api',
+        'dbname'   => 'happy_api',
         'user'     => 'rest',
         'password' => 'happy little api'
     )
