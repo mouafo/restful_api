@@ -1,4 +1,4 @@
-# happy_api
+# Happy API
 REST architecture web server
 
 ###This project was built with:
