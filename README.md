@@ -1,8 +1,6 @@
 # Happy API
 Minimal Restful API built with PHP & Silex 
 
-![](http://i.imgur.com/5icdezF.jpg)
-
 ###Routes
 **1)** HTTP 200 when GET on /  
 
