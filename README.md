@@ -1,12 +1,5 @@
 # Happy API
-REST architecture web server
-
-###This project was built with:
-    - Debian Linux 7 Wheezy
-    - PHP 5.4.42
-    - Silex 1.3.0
-    - Apache 2.2
-    - MariaDB 10.0.20
+Minimal Restful API built with PHP & Silex 
 
 ###Routes
 **1)** HTTP 200 when GET on /  
@@ -47,6 +40,12 @@ Create a user `rest` with password `happy little api` to the `happy_api` databas
 Import the test table in `/platform/db.sql`
 
 
+###This project was built with:
+    - Debian Linux 7 Wheezy
+    - PHP 5.4.42
+    - Silex 1.3.0
+    - Apache 2.2
+    - MariaDB 10.0.20
 
 Made by
 -------
