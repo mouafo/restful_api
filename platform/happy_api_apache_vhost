@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+    ServerAdmin your_email@domain.com
+    ServerName same.url.as.your.etc.hosts.file
+ 
+    DocumentRoot /var/www/happy_api/web
+    <Directory /var/www/happy_api/web>
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+
+    ErrorLog /var/www/logs/error.log
+    CustomLog /var/www/logs/access.log combined
+
+</VirtualHost>
